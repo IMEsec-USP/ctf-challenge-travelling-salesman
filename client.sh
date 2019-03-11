@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SERVER='localhost'
-PORT='8000'
+SERVER='chall2.imesec.ime.usp.br'
+PORT='7333'
 
 function show_help() {
     cat <<-EOF 
