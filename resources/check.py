@@ -42,6 +42,7 @@ class Check:
             return
 
         distance = calculate_distance(self.cities, cities)
+        
         best_distance = BestDistance.get()
 
         if best_distance.distance < distance:
