@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# SERVER='chall2.imesec.ime.usp.br'
-# PORT='7333'
-SERVER='localhost'
+SERVER='chall2.imesec.ime.usp.br'
 PORT='7333'
+# SERVER='localhost'
+# PORT='7333'
 
 function show_help() {
     cat <<-EOF 

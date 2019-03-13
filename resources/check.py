@@ -31,6 +31,8 @@ class Check:
             res.body = str(e).encode('utf-8')
             return
 
+        cities = [city.strip() for city in cities]
+
         if not isinstance(cities, list): 
             res.status = falcon.HTTP_400
             res.body = b'Erro inesperado. Reporte para @pedro823 no telegram.'
@@ -48,5 +50,6 @@ class Check:
             res.body = f'Desculpe... Miguel não está disposto a tomar um caminho tão longo!\nSua distância foi de {distance}'.encode('utf-8')
             return
 
+        print(f'Client got the flag with distance {distance}!')
         res.status = falcon.HTTP_200
         res.body = FLAG.encode('utf-8')
