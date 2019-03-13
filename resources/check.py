@@ -1,8 +1,8 @@
 import falcon
 import json
 from utils.data_parser import parse_cities
-from checker.check_travel import is_valid_travel, calculate_distance
-from model.best_distance import BestDistance
+from checker.check_travel import is_valid_travel, calculate_distance, is_good_travel
+from data.flag import FLAG
 
 cities_file = 'data/texas.txt'
 
@@ -43,27 +43,10 @@ class Check:
 
         distance = calculate_distance(self.cities, cities)
         
-        best_distance = BestDistance.get()
-
-        if best_distance.distance < distance:
+        if not is_good_travel(distance):
             res.status = falcon.HTTP_400
-            res.body = f'Oh não! A melhor distância é {best_distance.distance} por {best_distance.author}. Sua distância foi {distance}.'.encode('utf-8')
+            res.body = f'Desculpe... Miguel não está disposto a tomar um caminho tão longo!\nSua distância foi de {distance}'.encode('utf-8')
             return
-        
-        # We didn't make enough operations to lose precision
-        if best_distance.distance == distance:
-            all_authors = [i.author for i in BestDistance.get_all()]
-            if author in all_authors:
-                res.status = falcon.HTTP_400
-                res.body = f'Você já está na lista da liderança! A lista é {all_authors}'.encode('utf-8')
-                return
-
-            BestDistance.append(distance, author)
-            res.status = falcon.HTTP_200
-            res.body = f'Você alcançou o melhor atual. A distância foi de {distance}. Você foi adicionado na lista da liderança.'.encode('utf-8')
-            return
-
-        BestDistance.set(distance, author)
 
         res.status = falcon.HTTP_200
-        res.body = f'Ótimo! Você é o novo líder do placar com uma distância de {distance}.'.encode('utf-8')
+        res.body = FLAG.encode('utf-8')

@@ -1,8 +1,7 @@
 from utils.type_checker import type_checked
 from utils.point import Point
-from model.best_distance import BestDistance
 
-THRESHOLD = 260
+THRESHOLD = 260.0
 
 def is_valid_travel(cities: dict, travel: list) -> bool:
     if len(set(travel)) != len(travel):

@@ -1,0 +1,1 @@
+FLAG = 'CTF{m!gU3L_3h_MeU_am1G0!}'
